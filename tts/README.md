@@ -4,7 +4,7 @@ A tiny CLI for turning `.txt` and `.md` files into audio with OpenAI text-to-spe
 
 ## Setup
 
-From the repo root:
+Install dependencies from the repo root:
 
 ```bash
 npm install
@@ -12,14 +12,15 @@ npm install
 
 For environment variables, see the top-level [Env Setup](../README.md#env-setup).
 
-For Google Drive audio uploads, create a package-level `.env` from this folder:
+Run the commands below from this `tts/` directory unless noted.
+
+For Google Drive audio uploads, create a package-level `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-Then set the Drive folder ID. This is only required when using `--upload-gdrive`.
-Open the folder in Google Drive and copy the URL segment after `/folders/`:
+Then set the Drive folder ID. This is only required when using `--upload-gdrive`. Open the folder in Google Drive and copy the URL segment after `/folders/`:
 
 ```bash
 TTS_GOOGLE_DRIVE_AUDIO_FOLDER_ID=your_drive_folder_id
@@ -29,25 +30,20 @@ Before the first Google Drive upload, run the top-level OAuth setup. See [Google
 
 ## Use
 
-Put source files in `text/`, then run:
+Put source files in `text/`. Bare filenames resolve there. The main TTS command also works from the repo root.
 
 ```bash
 npm run tts -- my-file.md
 ```
 
-You can also run it from the repo root:
-
-```bash
-npm run tts -- my-file.md
-```
-
-You can also pass an explicit path:
+Explicit paths resolve from where you run the command:
 
 ```bash
 npm run tts -- text/my-file.md
+npm run tts -- ../notes/my-file.md
 ```
 
-Audio is written to `audio/` with a timestamped filename, for example:
+By default, audio is written to `audio/` with a timestamped filename:
 
 ```text
 audio/my-file.20260613_220531.mp3
